@@ -1,0 +1,161 @@
+
+<!-- 説明なし / 割引あり -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通販サイト</title>
+    <link rel="stylesheet" href="shoppingStyles.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+</head>
+
+<body>
+    <!--  トップ画像 -->
+    <!-- Swiper container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide"><img src="images/topA.png" alt="Image 1"></div>
+            <div class="swiper-slide"><img src="images/topC.png" alt="Image 3"></div>
+            <div class="swiper-slide"><img src="images/topD.png" alt="Image 4"></div>
+            <!-- ... -->
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="parent-of-products">
+        <div class="products">
+            <!-- 一つの商品 -->
+            <div class="product">
+                <img src="images/product0.png" alt="商品画像1" class="productImg">
+                <div class="product-name">商品名1</div>
+                <div class="product-price">¥10000</div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product1.png" alt="商品画像1" class="productImg">
+                <img src="images/ecofriendly.png" alt="Mark" class="mark-image"> <!-- eco -->
+                <div class="product-name">商品名1</div>
+                <div class="product-price">¥10000</div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product2.png" alt="商品画像1" class="productImg">
+                <div class="product-name">商品名1</div>
+                <div class="product-price">¥10000</div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product2.png" alt="商品画像1" class="productImg">
+                <div class="product-name">商品名1</div>
+                <div class="product-price">¥10000</div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+<footer>
+    <h2>YOUR CART</h2>
+    <div class="carts">
+        <div class="cart-items" id="cart-items">
+            <!-- ここに選択された商品が追加されます -->
+        </div>
+        <div class="totalButton">
+            <div class="cart-total">
+                <h3>合計</h3>
+                <span id="yen">¥<span id="total-price">0</span></span>
+            </div>
+            <button class="finish-shopping">Finish Shopping</button>
+        </div>
+    </div>
+
+</footer>
+
+
+<!--　カートに追加java -->
+<script>
+    // カートに追加された商品を保存する配列
+    let cart = [];
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                let productDiv = this.parentElement;
+                let productName = productDiv.querySelector('.product-name').innerText;
+                let productPrice = parseFloat(productDiv.querySelector('.product-price')
+                    .innerText.replace('¥', ''));
+                let productImage = productDiv.querySelector('img').src;
+
+                // カートに商品情報を追加
+                cart.push({
+                    name: productName,
+                    price: productPrice,
+                    image: productImage
+                });
+
+                // カート表示を更新
+                let cartItems = document.getElementById('cart-items');
+                let newItem = document.createElement('div');
+                newItem.className = "cart-item";
+                newItem.innerHTML = `
+            <img src="${productImage}" alt="${productName}" class="cart-item-image">
+            `;
+                cartItems.appendChild(newItem);
+
+                updateTotalPrice(productPrice);
+            });
+        });
+    });
+</script>
+<script>
+    function sendToSheet(productName, productPrice) {
+        var url = "https://script.google.com/macros/s/AKfycbw93KyV7zD2TwwAciBR2jyHIxrQKjsjGNTifFMbChymZ_CM0iEAg41GptScKO8rhslRIQ/exec"; // GASからコピーしたURLをここにペースト
+        var data = {
+            "productName": productName,
+            "productPrice": productPrice
+        };
+        fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+    }
+</script>
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        // 2秒（2000ミリ秒）ごとにスライドを変更
+        autoplay: {
+            delay: 3000,
+        },
+        // 他のオプションもこちらに追加できます
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        speed: 1000
+    });
+</script>
+
+
+</html>
