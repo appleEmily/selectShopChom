@@ -135,6 +135,16 @@
 </script>
 
 <script>
+    // カート内の合計金額を計算・更新する関数
+function updateTotalPrice(newPrice) {
+    let currentTotal = parseFloat(document.getElementById('total-price').innerText);
+    currentTotal += newPrice;
+    document.getElementById('total-price').innerText = currentTotal;
+}
+
+</script>
+
+<script>
     function sendToSheet(productName, productPrice) {
         var url = "https://script.google.com/macros/s/AKfycbw93KyV7zD2TwwAciBR2jyHIxrQKjsjGNTifFMbChymZ_CM0iEAg41GptScKO8rhslRIQ/exec"; // GASからコピーしたURLをここにペースト
         var data = {
@@ -171,18 +181,19 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const products = document.querySelectorAll('.product');
+    const productImages = document.querySelectorAll('.productImg');
     const popup = document.getElementById('product-popup');
     const closeBtn = document.querySelector('.product-popup-close');
     const popupImg = document.getElementById('popup-image');
     const popupName = document.getElementById('popup-name');
     const popupPrice = document.getElementById('popup-price');
 
-    products.forEach(product => {
-        product.addEventListener('click', function() {
-            const imgSrc = product.querySelector('.productImg').getAttribute('src');
-            const productName = product.querySelector('.product-name').textContent;
-            const productPrice = product.querySelector('.product-price').textContent;
+    productImages.forEach(productImg => {
+        productImg.addEventListener('click', function() {
+            const parentProduct = productImg.closest('.product');
+            const imgSrc = productImg.getAttribute('src');
+            const productName = parentProduct.querySelector('.product-name').textContent;
+            const productPrice = parentProduct.querySelector('.product-price').textContent;
 
             popupImg.setAttribute('src', imgSrc);
             popupName.textContent = productName;
@@ -196,6 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
         popup.style.display = 'none';
     });
 });
+
 </script>
 
 

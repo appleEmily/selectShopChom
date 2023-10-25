@@ -24,7 +24,8 @@
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            <div class="swiper-slide"><img src="images/topA.png" alt="Image 1"></div>
+            <div class="swiper-slide"><img src="images/topB.png" alt="Image 1"></div>
+            <div class="swiper-slide"><img src="images/topA.png" alt="Image 2"></div>
             <div class="swiper-slide"><img src="images/topC.png" alt="Image 3"></div>
             <div class="swiper-slide"><img src="images/topD.png" alt="Image 4"></div>
             <!-- ... -->
@@ -100,12 +101,15 @@
                 let productPrice = parseFloat(productDiv.querySelector('.product-price')
                     .innerText.replace('¥', ''));
                 let productImage = productDiv.querySelector('img').src;
+                //ecoマークがあるかどうか。
+                let isEco = productDiv.querySelector('.mark-image') !== null;
 
                 // カートに商品情報を追加
                 cart.push({
                     name: productName,
                     price: productPrice,
-                    image: productImage
+                    image: productImage,
+                    eco: isEco
                 });
 
                 // カート表示を更新
@@ -122,6 +126,42 @@
         });
     });
 </script>
+
+<script>
+    // カート内の合計金額を計算・更新する関数
+function updateTotalPrice() {
+    let currentTotal = 0;
+    let ecoCount = 0;
+
+    for (let item of cart) {
+        currentTotal += item.price;
+        if (item.eco) ecoCount++;
+    }
+
+    // もし「eco」マーク付きの商品が2つ以上なら10%オフ
+    let discountApplied = false;
+    if (ecoCount >= 2) {
+        currentTotal *= 0.9; // 10%オフ
+        discountApplied = true;
+    }
+
+    document.getElementById('total-price').innerText = Math.floor(currentTotal); // 切り捨てて整数を表示
+
+    // すでに「割引適用済み」が表示されているかどうかをチェック
+    let existingNotice = document.querySelector('.cart-total .discount-notice');
+    if (discountApplied && !existingNotice) {
+        let discountNotice = document.createElement('div');
+        discountNotice.className = 'discount-notice';
+        discountNotice.innerText = "割引適用済み";
+        document.querySelector('.cart-total').appendChild(discountNotice);
+    } else if (!discountApplied && existingNotice) {
+        existingNotice.remove();
+    }
+}
+
+
+</script>
+
 <script>
     function sendToSheet(productName, productPrice) {
         var url = "https://script.google.com/macros/s/AKfycbw93KyV7zD2TwwAciBR2jyHIxrQKjsjGNTifFMbChymZ_CM0iEAg41GptScKO8rhslRIQ/exec"; // GASからコピーしたURLをここにペースト

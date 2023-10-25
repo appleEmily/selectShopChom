@@ -25,6 +25,7 @@
         <div class="swiper-wrapper">
             <!-- Slides -->
             <div class="swiper-slide"><img src="images/topA.png" alt="Image 1"></div>
+            <div class="swiper-slide"><img src="images/topB.png" alt="Image 3"></div>
             <div class="swiper-slide"><img src="images/topC.png" alt="Image 3"></div>
             <div class="swiper-slide"><img src="images/topD.png" alt="Image 4"></div>
             <!-- ... -->
@@ -122,6 +123,17 @@
         });
     });
 </script>
+
+<script>
+    // カート内の合計金額を計算・更新する関数
+function updateTotalPrice(newPrice) {
+    let currentTotal = parseFloat(document.getElementById('total-price').innerText);
+    currentTotal += newPrice;
+    document.getElementById('total-price').innerText = currentTotal;
+}
+
+</script>
+
 <script>
     function sendToSheet(productName, productPrice) {
         var url = "https://script.google.com/macros/s/AKfycbw93KyV7zD2TwwAciBR2jyHIxrQKjsjGNTifFMbChymZ_CM0iEAg41GptScKO8rhslRIQ/exec"; // GASからコピーしたURLをここにペースト
