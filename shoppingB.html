@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>通販サイト</title>
     <link rel="stylesheet" href="shoppingStyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
@@ -144,8 +146,9 @@ function updateTotalPrice(newPrice) {
 
 </script>
 
+<!-- 買った商品を送る。 -->
 <script>
-    function sendToSheet(productName, productPrice) {
+      function sendToSheet(productName, productPrice) {
         var url = "https://script.google.com/macros/s/AKfycbw93KyV7zD2TwwAciBR2jyHIxrQKjsjGNTifFMbChymZ_CM0iEAg41GptScKO8rhslRIQ/exec"; // GASからコピーしたURLをここにペースト
         var data = {
             "productName": productName,
@@ -159,10 +162,14 @@ function updateTotalPrice(newPrice) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
+        })
+        .then(function() {
+            window.location.href = "survey.html";
         });
     }
 </script>
 
+<!-- トップ画像 -->
 <script>
     var swiper = new Swiper('.swiper-container', {
         // 2秒（2000ミリ秒）ごとにスライドを変更
@@ -179,6 +186,7 @@ function updateTotalPrice(newPrice) {
     });
 </script>
 
+<!-- ポップアップ表示 -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const productImages = document.querySelectorAll('.productImg');
