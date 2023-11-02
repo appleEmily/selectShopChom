@@ -57,8 +57,38 @@
                 <button class="add-to-cart-btn">Add to Cart</button>
             </div>
             <div class="product">
-                <img src="images/product2.png" alt="商品画像1" class="productImg">
-                <div class="product-name">商品名1</div>
+                <img src="images/product3.png" alt="商品画像1" class="productImg">
+                <div class="product-name">商品名2</div>
+                <div class="product-price">¥10000</div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product4.png" alt="商品画像1" class="productImg">
+                <div class="product-name">商品名3</div>
+                <div class="product-price">¥10000</div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product5.png" alt="商品画像1" class="productImg">
+                <div class="product-name">商品名4</div>
+                <div class="product-price">¥10000</div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product6.png" alt="商品画像1" class="productImg">
+                <div class="product-name">商品名4</div>
+                <div class="product-price">¥10000</div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product7.png" alt="商品画像1" class="productImg">
+                <div class="product-name">商品名6</div>
+                <div class="product-price">¥10000</div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/product8.png" alt="商品画像1" class="productImg">
+                <div class="product-name">商品名7</div>
                 <div class="product-price">¥10000</div>
                 <button class="add-to-cart-btn">Add to Cart</button>
             </div>
@@ -76,7 +106,7 @@
             <!-- <button class="add-to-cart-btn">Add to Cart</button> -->
         </div>
     </div>
-    
+
 
 </body>
 
@@ -138,34 +168,52 @@
 
 <script>
     // カート内の合計金額を計算・更新する関数
-function updateTotalPrice(newPrice) {
-    let currentTotal = parseFloat(document.getElementById('total-price').innerText);
-    currentTotal += newPrice;
-    document.getElementById('total-price').innerText = currentTotal;
-}
-
+    function updateTotalPrice(newPrice) {
+        let currentTotal = parseFloat(document.getElementById('total-price').innerText);
+        currentTotal += newPrice;
+        document.getElementById('total-price').innerText = currentTotal;
+    }
 </script>
-
 <!-- 買った商品を送る。 -->
+
 <script>
-      function sendToSheet(productName, productPrice) {
-        var url = "https://script.google.com/macros/s/AKfycbw93KyV7zD2TwwAciBR2jyHIxrQKjsjGNTifFMbChymZ_CM0iEAg41GptScKO8rhslRIQ/exec"; // GASからコピーしたURLをここにペースト
+    document.addEventListener('DOMContentLoaded', function () {
+        const finishShoppingButton = document.querySelector('.finish-shopping');
+        finishShoppingButton.addEventListener('click', sendToSheet);
+    });
+
+    function sendToSheet() {
+        var url =
+            "https://script.google.com/macros/s/AKfycbw8_z2e8SKIipO379TUHCbATmSCuEgM0Zoqfaz6EbgjDYxL7Kw5Um6ujllPFZnW_TdZoA/exec";
+
+        var productsInCart = cart.map(item => item.name);
+        console.log("productsInCart:", productsInCart);
+
         var data = {
-            "productName": productName,
-            "productPrice": productPrice
+            sheetName: window.location.pathname.split("/").pop().replace(".html", ""),
+            purchases: productsInCart,
+            type: "shopping"
         };
+        console.log("data:", data);
+
         fetch(url, {
-            method: 'POST',
-            mode: 'no-cors',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(function() {
-            window.location.href = "survey.html";
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                console.log("Response received:", response);
+                return response.text();
+            })
+            .then(text => {
+                console.log("Response body:", text);
+                window.location.href = "survey.html";
+            })
+            .catch(error => {
+                console.error("Fetch error:", error);
+            });
     }
 </script>
 
@@ -188,34 +236,33 @@ function updateTotalPrice(newPrice) {
 
 <!-- ポップアップ表示 -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const productImages = document.querySelectorAll('.productImg');
-    const popup = document.getElementById('product-popup');
-    const closeBtn = document.querySelector('.product-popup-close');
-    const popupImg = document.getElementById('popup-image');
-    const popupName = document.getElementById('popup-name');
-    const popupPrice = document.getElementById('popup-price');
+    document.addEventListener('DOMContentLoaded', function () {
+        const productImages = document.querySelectorAll('.productImg');
+        const popup = document.getElementById('product-popup');
+        const closeBtn = document.querySelector('.product-popup-close');
+        const popupImg = document.getElementById('popup-image');
+        const popupName = document.getElementById('popup-name');
+        const popupPrice = document.getElementById('popup-price');
 
-    productImages.forEach(productImg => {
-        productImg.addEventListener('click', function() {
-            const parentProduct = productImg.closest('.product');
-            const imgSrc = productImg.getAttribute('src');
-            const productName = parentProduct.querySelector('.product-name').textContent;
-            const productPrice = parentProduct.querySelector('.product-price').textContent;
+        productImages.forEach(productImg => {
+            productImg.addEventListener('click', function () {
+                const parentProduct = productImg.closest('.product');
+                const imgSrc = productImg.getAttribute('src');
+                const productName = parentProduct.querySelector('.product-name').textContent;
+                const productPrice = parentProduct.querySelector('.product-price').textContent;
 
-            popupImg.setAttribute('src', imgSrc);
-            popupName.textContent = productName;
-            popupPrice.textContent = productPrice;
+                popupImg.setAttribute('src', imgSrc);
+                popupName.textContent = productName;
+                popupPrice.textContent = productPrice;
 
-            popup.style.display = 'block';
+                popup.style.display = 'block';
+            });
+        });
+
+        closeBtn.addEventListener('click', function () {
+            popup.style.display = 'none';
         });
     });
-
-    closeBtn.addEventListener('click', function() {
-        popup.style.display = 'none';
-    });
-});
-
 </script>
 
 

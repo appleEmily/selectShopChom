@@ -2,7 +2,7 @@ html, body {
     height: max-content;
     margin: 0;
     padding-bottom: 100px;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Noto Sans', sans-serif
 }
 
 
@@ -159,8 +159,8 @@ footer h2 {
     margin: 0;
 }
 
-#yen {
-}
+/* #yen {
+} */
 
 #total-price {
     font-weight: bold;

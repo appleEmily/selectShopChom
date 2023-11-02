@@ -161,12 +161,16 @@ function updateTotalPrice() {
 </script>
 
 <script>
-    function sendToSheet(productName, productPrice) {
-        var url = "https://script.google.com/macros/s/AKfycbw93KyV7zD2TwwAciBR2jyHIxrQKjsjGNTifFMbChymZ_CM0iEAg41GptScKO8rhslRIQ/exec"; // GASからコピーしたURLをここにペースト
+    function sendToSheet() {
+        var url = "https://script.google.com/macros/s/AKfycbxN3YnUXpeat1tt3BDE-6rEjByFBwonJ6P3KdPj08XKwpGeAFHfOosDZna3LTveriJgAg/exec";
+    
+        var productsInCart = cart.map(item => item.name);
         var data = {
-            "productName": productName,
-            "productPrice": productPrice
+            sheetName: window.location.pathname.split("/").pop().replace(".html", ""),
+            purchases: productsInCart,
+            type: "shopping"
         };
+    
         fetch(url, {
             method: 'POST',
             mode: 'no-cors',
@@ -175,9 +179,12 @@ function updateTotalPrice() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
+        })
+        .then(function() {
+            window.location.href = "survey.html";
         });
     }
-</script>
+    </script>
 
 <script>
     var swiper = new Swiper('.swiper-container', {

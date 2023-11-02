@@ -54,8 +54,10 @@
             submitButton.disabled = true;
 
             const scriptURL =
-                'https://script.google.com/macros/s/AKfycbw93KyV7zD2TwwAciBR2jyHIxrQKjsjGNTifFMbChymZ_CM0iEAg41GptScKO8rhslRIQ/exec';
+                'https://script.google.com/macros/s/AKfycbw8_z2e8SKIipO379TUHCbATmSCuEgM0Zoqfaz6EbgjDYxL7Kw5Um6ujllPFZnW_TdZoA/exec';
             const formData = new FormData(document.getElementById('basicInfoForm'));
+
+            formData.append("type", "basicInfo");
 
             fetch(scriptURL, {
                     method: 'POST',
