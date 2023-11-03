@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .survey-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  fieldset {
+    border: none;
+    margin-bottom: 20px;
+  }
+  
+  legend {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: inline-block;
+    margin-top: 10px;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* So the width includes padding */
+  }
+  
+  input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  input[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #4cae4c;
+  }
+  
+  /* Center the form horizontally and adjust form input styles */
+  .survey-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Style the form headings and labels */
+  legend, label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Style checkboxes */
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  /* Style the range input for rating */
+  input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  /* Style the text input */
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Style the submit button */
+  input[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #4cae4c;
+  }
+  

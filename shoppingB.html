@@ -183,39 +183,10 @@
     });
 
     function sendToSheet() {
-        //     var url =
-        //         'https://script.google.com/macros/s/AKfycbwxNnf9iKXf-E_V8Vu13JnRU05xuBngdhojIs_pt6d9ammvv1jkhEe__4vHaxdViuVh/exec';
+        //ボタンの無効化
+        const finishShoppingButton = document.querySelector('.finish-shopping');
+    finishShoppingButton.disabled = true;
 
-        //     var productsInCart = cart.map(item => item.name);
-        //     console.log("productsInCart:", productsInCart);
-
-        //     var data = {
-        //         sheetName: window.location.pathname.split("/").pop().replace(".html", ""),
-        //         purchases: productsInCart,
-        //         type: "shopping"
-        //     };
-        //     console.log("data:", data);
-        //     console.log("sheetName", data.sheetName);
-
-        //     fetch(url, {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/json'
-        //             },
-        //             body: JSON.stringify(data),
-        //         })
-        //         .then(response => {
-        //             console.log("Response received:", response);
-        //             return response.text();
-        //         })
-        //         .then(text => {
-        //             console.log("Response body:", text);
-        //             window.location.href = "survey.html";
-        //         })
-        //         .catch(error => {
-        //             console.error("Fetch error:", error);
-        //         });
-        // }
         var url =
             'https://script.google.com/macros/s/AKfycbwPxIILlguR9MGzUKgOqxELzbfm8TM7Yy5gNUDPGTQ5wyD9BnwyCqRBc0g2kigMJfId/exec';
 
