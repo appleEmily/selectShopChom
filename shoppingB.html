@@ -34,8 +34,16 @@
         <div class="swiper-pagination"></div>
     </div>
 
+    <h2> New Arrivals</h2>
+
+    <!-- B/Dにだけかく -->
+    <div class="popText">
+        <img src="/images/ligjt.png" alt=""><p>商品画像タップで詳細が見れます</p>
+    </div>
+    
     <div class="parent-of-products">
         <div class="products">
+
             <!-- 一つの商品 -->
             <div class="product">
                 <img src="images/product0.png" alt="商品画像1" class="productImg">
@@ -185,7 +193,7 @@
     function sendToSheet() {
         //ボタンの無効化
         const finishShoppingButton = document.querySelector('.finish-shopping');
-    finishShoppingButton.disabled = true;
+        finishShoppingButton.disabled = true;
 
         var url =
             'https://script.google.com/macros/s/AKfycbw2gN8b1dWFeYyEJeYbZY9MCmyNz8bmnzDt5VjoY-hMGzdWcklN4Iy7HFYVspsU6k81/exec';

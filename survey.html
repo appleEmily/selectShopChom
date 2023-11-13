@@ -53,8 +53,12 @@
 
         function sendToSheet(event) {
             event.preventDefault();
+
+            const button = event.target;
+            button.disabled = true; // ボタンを無効にする
+
             var url =
-                'https://script.google.com/macros/s/AKfycbw2gN8b1dWFeYyEJeYbZY9MCmyNz8bmnzDt5VjoY-hMGzdWcklN4Iy7HFYVspsU6k81/exec';
+                'https://script.google.com/macros/s/AKfycbyghy4SqFkxz0qa7ilT2Bn7iNRvLPMOIPqtss9OLKEw-Ly3knHb8bEtbOstXrs6w6g/exec';
 
             var formData = new FormData(document.getElementById('survey-form'));
             formData.append('type', 'survey');

@@ -1,0 +1,30 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.finish-container {
+    background: #fff;
+    padding: 18px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 390px;
+}
+
+h1 {
+    color: #252525;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #252525;
+    line-height: 1.6;
+}
