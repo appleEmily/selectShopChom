@@ -15,15 +15,14 @@
         <form id="survey-form">
             <fieldset>
                 <legend>購買行動</legend>
-                <label for="shopping-criteria">今回のショッピングサイトで何を重視して商品を選びましたか？（複数選択可）</label><br>
-                <input type="checkbox" id="criteria-quality" name="shopping-criteria" value="quality">
-                <label for="criteria-quality">品質</label><br>
-                <input type="checkbox" id="criteria-price" name="shopping-criteria" value="price">
-                <label for="criteria-price">価格</label><br>
-                <input type="checkbox" id="criteria-eco" name="shopping-criteria" value="eco-friendly">
-                <label for="criteria-eco">環境に優しい</label><br>
-                <input type="checkbox" id="criteria-design" name="shopping-criteria" value="design">
-                <label for="criteria-design">デザイン</label><br>
+                <label for="criteria-quality">品質</label>
+                <input type="checkbox" id="criteria-quality" name="shopping-criteria" value="quality"><br>
+                <label for="criteria-price">価格</label>
+                <input type="checkbox" id="criteria-price" name="shopping-criteria" value="price"><br>
+                <label for="criteria-eco">環境に優しい</label>
+                <input type="checkbox" id="criteria-eco" name="shopping-criteria" value="eco-friendly"><br>
+                <label for="criteria-design">デザイン</label>
+                <input type="checkbox" id="criteria-design" name="shopping-criteria" value="design"><br>
 
                 <label for="impact-rating">環境にやさしいマークや割引はあなたの選択にどの程度影響しましたか？</label><br>
                 <input type="range" id="impact-rating" name="impact-rating" min="1" max="10">
@@ -38,31 +37,36 @@
                 <input type="range" id="eco-info-rating" name="eco-info-rating" min="1" max="10">
             </fieldset>
 
-            <button class="submitSurvey">アンケートを送信</button>
+            <button type="button" class="submitSurvey">アンケートを送信</button>
+
         </form>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // document.getElementById('survey-form').addEventListener('submit', function (event) {
-            //     event.preventDefault(); // フォームのデフォルトの送信を防止
-
             const submitSurveyButton = document.querySelector('.submitSurvey');
-            submitSurveyButton.addEventListener('click', sendToSheet);
+            submitSurveyButton.addEventListener('click', function (event) {
+                sendToSheet(event);
+            });
         });
 
-        function sendToSheet() {
-            var url =
-                'https://script.google.com/macros/s/AKfycbwPxIILlguR9MGzUKgOqxELzbfm8TM7Yy5gNUDPGTQ5wyD9BnwyCqRBc0g2kigMJfId/exec';
 
-            // フォームデータを取得
+        function sendToSheet(event) {
+            event.preventDefault();
+            var url =
+                'https://script.google.com/macros/s/AKfycbw2gN8b1dWFeYyEJeYbZY9MCmyNz8bmnzDt5VjoY-hMGzdWcklN4Iy7HFYVspsU6k81/exec';
+
             var formData = new FormData(document.getElementById('survey-form'));
-            formData.append('type', 'survey')
+            formData.append('type', 'survey');
+            var criteriaQuality = formData.getAll('shopping-criteria');
+            var impactRating = formData.get('impact-rating');
+            var siteExperience = formData.get('site-experience');
+            var ecoInfoRating = formData.get('eco-info-rating');
+
             console.log(formData);
-            // フォームデータをGoogle Apps Scriptに送信
             fetch(url, {
                     method: 'POST',
-                    body: formData // フォームデータを送信
+                    body: formData
                 })
                 .then(response => {
                     console.log("Response received:", response);
@@ -70,15 +74,13 @@
                 })
                 .then(text => {
                     console.log("Response body:", text);
-                    window.location.href = "survey.html";
+                    window.location.href = 'finish.html';
                 })
                 .catch(error => {
                     console.error("Fetch error:", error);
                 });
         }
     </script>
-
-
 </body>
 
 </html>

@@ -126,12 +126,11 @@
 
 <script>
     // カート内の合計金額を計算・更新する関数
-function updateTotalPrice(newPrice) {
-    let currentTotal = parseFloat(document.getElementById('total-price').innerText);
-    currentTotal += newPrice;
-    document.getElementById('total-price').innerText = currentTotal;
-}
-
+    function updateTotalPrice(newPrice) {
+        let currentTotal = parseFloat(document.getElementById('total-price').innerText);
+        currentTotal += newPrice;
+        document.getElementById('total-price').innerText = currentTotal;
+    }
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -142,10 +141,10 @@ function updateTotalPrice(newPrice) {
     function sendToSheet() {
         //ボタンの無効化
         const finishShoppingButton = document.querySelector('.finish-shopping');
-    finishShoppingButton.disabled = true;
+        finishShoppingButton.disabled = true;
 
         var url =
-            'https://script.google.com/macros/s/AKfycbwPxIILlguR9MGzUKgOqxELzbfm8TM7Yy5gNUDPGTQ5wyD9BnwyCqRBc0g2kigMJfId/exec';
+            'https://script.google.com/macros/s/AKfycbw2gN8b1dWFeYyEJeYbZY9MCmyNz8bmnzDt5VjoY-hMGzdWcklN4Iy7HFYVspsU6k81/exec';
 
         var formData = new FormData(); // フォームデータを作成
 
@@ -170,7 +169,7 @@ function updateTotalPrice(newPrice) {
                 console.error("Fetch error:", error);
             });
     }
-    </script>
+</script>
 
 <script>
     var swiper = new Swiper('.swiper-container', {
