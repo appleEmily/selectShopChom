@@ -16,8 +16,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%; /* コンテナの幅をスクリーン幅に合わせる */
-  max-width: 500px; /* 最大幅を設定してデスクトップでの表示を考慮 */
-  margin: auto; /* 上下中央揃え */
+  /* max-width: 500px; 最大幅を設定してデスクトップでの表示を考慮 */
 }
 
 h1 {
@@ -43,7 +42,7 @@ legend {
 }
 
 label {
-  display: block; /* ラベルをブロック要素にして幅いっぱいに */
+  display: inline-block; 
   margin-top: 10px;
   color: #252525;
   font-size: 1em; /* フォントサイズを大きくする */

@@ -38,9 +38,10 @@
 
     <!-- B/Dにだけかく -->
     <div class="popText">
-        <img src="/images/ligjt.png" alt=""><p>商品画像タップで詳細が見れます</p>
+        <img src="/images/ligjt.png" alt="">
+        <p>商品画像タップで詳細が見れます</p>
     </div>
-    
+
     <div class="parent-of-products">
         <div class="products">
 
@@ -138,50 +139,65 @@
 
 <!--　カートに追加java -->
 <script>
-    // カートに追加された商品を保存する配列
     let cart = [];
-
+    const maxTotal = 20000; // 設定したい上限金額
+    
+    // 商品をカートに表示する関数
+    function displayCartItem(item, index) {
+        let cartItems = document.getElementById('cart-items');
+        let newItem = document.createElement('div');
+        newItem.className = "cart-item";
+        newItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">¥${item.price}</div>
+            <button class="remove-item-btn" onclick="removeCartItem(${index})">&times;</button>
+        `;
+        cartItems.appendChild(newItem);
+    }
+    
+    // カート内の合計金額を計算・更新する関数
+    function updateTotalPrice() {
+        let total = cart.reduce((sum, item) => sum + item.price, 0);
+        document.getElementById('total-price').innerText = Math.round(total);
+    }
+    
+    // カートから商品を削除する関数
+    function removeCartItem(index) {
+        cart.splice(index, 1); // カートから商品を削除
+        let cartItems = document.getElementById('cart-items');
+        cartItems.removeChild(cartItems.children[index]);
+        updateTotalPrice(); // 合計金額を更新
+    }
+    
     document.addEventListener('DOMContentLoaded', function () {
         let addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-
+    
         addToCartButtons.forEach(button => {
             button.addEventListener('click', function () {
                 let productDiv = this.parentElement;
                 let productName = productDiv.querySelector('.product-name').innerText;
-                let productPrice = parseFloat(productDiv.querySelector('.product-price')
-                    .innerText.replace('¥', ''));
+                let productPrice = parseFloat(productDiv.querySelector('.product-price').innerText.replace('¥', ''));
                 let productImage = productDiv.querySelector('img').src;
-
+    
                 // カートに商品情報を追加
-                cart.push({
+                let newItem = {
                     name: productName,
                     price: productPrice,
                     image: productImage
-                });
-
-                // カート表示を更新
-                let cartItems = document.getElementById('cart-items');
-                let newItem = document.createElement('div');
-                newItem.className = "cart-item";
-                newItem.innerHTML = `
-            <img src="${productImage}" alt="${productName}" class="cart-item-image">
-            `;
-                cartItems.appendChild(newItem);
-
-                updateTotalPrice(productPrice);
+                };
+                cart.push(newItem);
+    
+                // カートに商品を表示
+                displayCartItem(newItem, cart.length - 1);
+                
+                // 合計金額を更新
+                updateTotalPrice();
             });
         });
     });
-</script>
-
-<script>
-    // カート内の合計金額を計算・更新する関数
-    function updateTotalPrice(newPrice) {
-        let currentTotal = parseFloat(document.getElementById('total-price').innerText);
-        currentTotal += newPrice;
-        document.getElementById('total-price').innerText = currentTotal;
-    }
-</script>
+    </script>
+    
 <!-- 買った商品を送る。 -->
 
 <script>
@@ -191,6 +207,17 @@
     });
 
     function sendToSheet() {
+
+        const currentTotal = parseFloat(document.getElementById('total-price').innerText);
+        if (currentTotal > 20000) {
+            // 合計金額が上限を超えている場合、アラートを表示し、処理を中断
+            alert('合計金額が20000円を超えているため、次のステップに進めません。');
+            // ボタンの無効化を解除
+            const finishShoppingButton = document.querySelector('.finish-shopping');
+            finishShoppingButton.disabled = false;
+            return; // ここで関数を終了させる
+        }
+
         //ボタンの無効化
         const finishShoppingButton = document.querySelector('.finish-shopping');
         finishShoppingButton.disabled = true;
@@ -215,10 +242,12 @@
             })
             .then(text => {
                 console.log("Response body:", text);
-                window.location.href = "survey.html";
+                window.location.href = "survey.html"; // 合計金額が20000円以下なら次のページへ移動
             })
             .catch(error => {
                 console.error("Fetch error:", error);
+                // エラーが発生した場合はボタンの無効化を解除
+                finishShoppingButton.disabled = false;
             });
     }
 </script>

@@ -273,3 +273,21 @@ footer h2 {
     padding: 10px;
     cursor: pointer;
 }
+
+/* 削除ボタン */
+.cart-item {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+.remove-item-btn {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.4);
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 10; /* 必要に応じて調整 */
+}
