@@ -1,7 +1,20 @@
 body {
     font-family: 'Noto Sans', sans-serif;
-    color: #222222;
+    color: #252525;
 }
+
+
+/* 説明文のスタイル */
+.description {
+    margin-bottom: 20px; /* タイトルとの間隔 */
+    padding: 15px;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 0.9em; /* 文字サイズ */
+    line-height: 1.4; /* 行間 */
+    text-align: center;
+}
+
+
 
 #formBlock {
      width: fit-content;
@@ -9,7 +22,7 @@ body {
 }
 
 .title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
     margin-top: 12px;

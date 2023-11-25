@@ -11,6 +11,18 @@
 </head>
 
 <body>
+    <!-- 説明文の追加 -->
+    <div class="description">
+        <h1 class="title">実験内容</h1>
+        <p>基本情報を入力していただいたのち、<br>select shop chom<br>にてお買い物を体験していただきます。
+            <br><br>-所持金-<br>
+            30,000円<br><br>
+            -その他条件-<br>
+            最低2点以上の商品を選択してください。<br>
+        </p>
+
+    </div>
+
     <div id="formBlock">
         <form id="basicInfoForm" onsubmit="event.preventDefault(); submitForm();">
             <h1 class="title">基本情報入力</h1>
@@ -49,6 +61,17 @@
 
     <script>
         function submitForm() {
+            // 入力値を取得
+            let age = document.getElementById('age').value;
+            let job = document.getElementById('job').value;
+
+            // 年齢と職業が入力されているか確認
+            if (age === '' || job === '') {
+                // 必須項目が入力されていない場合はアラートを表示
+                alert('年齢と職業は必須項目です。入力してください。');
+                return; // ここで処理を停止
+            }
+
             // ボタンを無効化
             let submitButton = document.getElementById('submitButton');
             submitButton.disabled = true;

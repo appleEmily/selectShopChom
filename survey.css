@@ -1,28 +1,27 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-  display: flex;
+  /* background-color: #f4f4f4; */
+  margin: 20px;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 10px; /* スマホでの表示を考慮して余白を追加 */
+  padding: 20px; /* スマホでの表示を考慮して余白を追加 */
 }
 
-.survey-container {
+/* .survey-container {
   background-color: #fff;
-  padding: 20px; /* モバイルに適したパディングに調整 */
+  padding: 20px; 
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%; /* コンテナの幅をスクリーン幅に合わせる */
-  /* max-width: 500px; 最大幅を設定してデスクトップでの表示を考慮 */
-}
+  width: 100%; 
+
+} */
 
 h1 {
   color: #333;
   margin-bottom: 20px;
-  font-size: 1.5em; /* タイトルのフォントサイズを大きくする */
+  font-size: 24px; 
 }
 
 form {
@@ -31,21 +30,21 @@ form {
 
 fieldset {
   border: none;
-  margin: 20px 0;
+  margin: 24px 0;
 }
 
 legend {
   font-weight: bold;
   color: #252525;
   margin-bottom: 15px;
-  font-size: 1.2em; /* フォントサイズを大きくする */
+  font-size: 24px; /* フォントサイズを大きくする */
 }
 
 label {
   display: inline-block; 
   margin-top: 10px;
   color: #252525;
-  font-size: 1em; /* フォントサイズを大きくする */
+  font-size: 20px; /* フォントサイズを大きくする */
 }
 
 input[type="checkbox"] {
@@ -60,6 +59,28 @@ input[type="range"] {
   margin-top: 10px; /* マージンを調整 */
   font-size: 1em; /* フォントサイズを大きく */
 }
+
+.button {
+  text-align: left;
+  width: 100%;
+}
+
+.submitSurvey {
+  background-color: #FFD900; /* 黄金色 */
+  color: #252525; /* 文字色 */
+  padding: 10px 20px; /* 上下のパディングと左右のパディング */
+  border: none; /* 境界線なし */
+  text-align: center; /* 文字を中央揃えに */
+  text-decoration: none; /* 下線を消す */
+  display: inline-block; /* インラインブロック要素として表示 */
+  font-size: 16px; /* 文字サイズ */
+  margin: 4px 2px; /* 外側の余白 */
+  cursor: pointer; /* カーソルをポインターに */
+  border-radius: 0; /* 角の丸みをなくす */
+  transition-duration: 0.4s; /* ホバー時の遷移の時間 */
+}
+
+
 
 input[type="submit"] {
   background-color: #ff9800;

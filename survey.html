@@ -36,9 +36,9 @@
                 <label for="eco-info-rating">環境にやさしい商品の説明・情報は十分でしたか？</label><br>
                 <input type="range" id="eco-info-rating" name="eco-info-rating" min="1" max="10">
             </fieldset>
-
+            <div class="button">
             <button type="button" class="submitSurvey">アンケートを送信</button>
-
+        </div>
         </form>
     </div>
 
@@ -58,10 +58,17 @@
             button.disabled = true; // ボタンを無効にする
 
             var url =
-                'https://script.google.com/macros/s/AKfycbyghy4SqFkxz0qa7ilT2Bn7iNRvLPMOIPqtss9OLKEw-Ly3knHb8bEtbOstXrs6w6g/exec';
+                'https://script.google.com/macros/s/AKfycbxeLRMBPKBBr7BMo8oD0LAdtOPkaVQ9vgcwWIXyAgNwcA1fSDbb_MUVEPlrh_EICVJ8/exec';
+
+            var fullPath = document.referrer;; // 現在のページのパス名を取得
+            var filenameWithExtension = fullPath.split('/').pop(); // 最後の部分（ファイル名）を取得
+            var filename = filenameWithExtension.replace('.html', ''); // 拡張子 .html を取り除く
+
+            console.log(filename); // "shoppingB" が出力される
 
             var formData = new FormData(document.getElementById('survey-form'));
             formData.append('type', 'survey');
+            formData.append('fileName', filename);
             var criteriaQuality = formData.getAll('shopping-criteria');
             var impactRating = formData.get('impact-rating');
             var siteExperience = formData.get('site-experience');
