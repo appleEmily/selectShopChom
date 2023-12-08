@@ -45,3 +45,18 @@ body {
     margin-left: 5px;
     font-size: 12px;  /* サイズを少し小さくしてみました。 */
 }
+
+#submitButton {
+    background-color: #FFD900; /* 黄金色 */
+    color: #252525; /* 文字色 */
+    padding: 2px 8px; /* 上下のパディングと左右のパディング */
+    border: none; /* 境界線なし */
+    text-align: center; /* 文字を中央揃えに */
+    text-decoration: none; /* 下線を消す */
+    display: inline-block; /* インラインブロック要素として表示 */
+    font-size: 12px; /* 文字サイズ */
+    margin: 4px 2px; /* 外側の余白 */
+    cursor: pointer; /* カーソルをポインターに */
+    border-radius: 0; /* 角の丸みをなくす */
+    transition-duration: 0.4s; /* ホバー時の遷移の時間 */
+}

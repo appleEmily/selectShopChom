@@ -87,11 +87,46 @@
 
 </footer>
 
-
 <!--　カートに追加java -->
 <script>
-    // カートに追加された商品を保存する配列
     let cart = [];
+    const maxTotal = 20000; // 設定したい上限金額
+
+    // 商品をカートに表示する関数
+    function displayCartItem(item, index) {
+    let cartItems = document.getElementById('cart-items');
+    let newItem = document.createElement('div');
+    newItem.className = "cart-item";
+    newItem.setAttribute('data-index', index); // data-index属性を設定
+    newItem.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">¥${item.price}</div>
+        <button class="remove-item-btn" onclick="removeCartItem(this)">×</button>
+    `;
+    cartItems.appendChild(newItem);
+}
+
+    // カート内の合計金額を計算・更新する関数
+    function updateTotalPrice() {
+        let total = cart.reduce((sum, item) => sum + item.price, 0);
+        document.getElementById('total-price').innerText = Math.round(total);
+    }
+
+    // カートから商品を削除する関数
+    function removeCartItem(button) {
+    let cartItem = button.closest('.cart-item'); // 最も近い親の.cart-item divを取得
+    let index = parseInt(cartItem.getAttribute('data-index')); // data-index属性からインデックスを取得
+    cart.splice(index, 1); // カート配列からアイテムを削除
+    cartItem.remove(); // DOMからアイテムを削除
+    
+    // 残りのアイテムのインデックスを更新
+    document.querySelectorAll('.cart-item').forEach((item, newIndex) => {
+        item.setAttribute('data-index', newIndex);
+    });
+    
+    updateTotalPrice(); // 合計金額を更新
+}
 
     document.addEventListener('DOMContentLoaded', function () {
         let addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
@@ -105,35 +140,25 @@
                 let productImage = productDiv.querySelector('img').src;
 
                 // カートに商品情報を追加
-                cart.push({
+                let newItem = {
                     name: productName,
                     price: productPrice,
                     image: productImage
-                });
+                };
+                cart.push(newItem);
 
-                // カート表示を更新
-                let cartItems = document.getElementById('cart-items');
-                let newItem = document.createElement('div');
-                newItem.className = "cart-item";
-                newItem.innerHTML = `
-            <img src="${productImage}" alt="${productName}" class="cart-item-image">
-            `;
-                cartItems.appendChild(newItem);
+                // カートに商品を表示
+                displayCartItem(newItem, cart.length - 1);
 
-                updateTotalPrice(productPrice);
+                // 合計金額を更新
+                updateTotalPrice();
             });
         });
     });
 </script>
 
-<script>
-    // カート内の合計金額を計算・更新する関数
-    function updateTotalPrice(newPrice) {
-        let currentTotal = parseFloat(document.getElementById('total-price').innerText);
-        currentTotal += newPrice;
-        document.getElementById('total-price').innerText = currentTotal;
-    }
-</script>
+<!-- 買った商品を送る。 -->
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const finishShoppingButton = document.querySelector('.finish-shopping');
@@ -141,19 +166,34 @@
     });
 
     function sendToSheet() {
+
+        const currentTotal = parseFloat(document.getElementById('total-price').innerText);
+        if (currentTotal > 20000) {
+            // 合計金額が上限を超えている場合、アラートを表示し、処理を中断
+            alert('合計金額が20000円を超えているため、次のステップに進めません。');
+            // ボタンの無効化を解除
+            const finishShoppingButton = document.querySelector('.finish-shopping');
+            finishShoppingButton.disabled = false;
+            return; // ここで関数を終了させる
+        }
+
         //ボタンの無効化
         const finishShoppingButton = document.querySelector('.finish-shopping');
         finishShoppingButton.disabled = true;
 
         var url =
-            'https://script.google.com/macros/s/AKfycbw2gN8b1dWFeYyEJeYbZY9MCmyNz8bmnzDt5VjoY-hMGzdWcklN4Iy7HFYVspsU6k81/exec';
+            'https://script.google.com/macros/s/AKfycbxo9Rb3I5bvtNO8e1k0DJO7TyF22y7Zb-GTwOI4zD7Hp_DMG1mcdV6D3ywyTw5jmf4X/exec';
 
         var formData = new FormData(); // フォームデータを作成
+        const totalAmount = parseFloat(document.getElementById('total-price').innerText);
+
 
         var productsInCart = cart.map(item => item.name);
         formData.append('sheetName', window.location.pathname.split("/").pop().replace(".html", ""));
         formData.append('purchases', productsInCart);
+        formData.append('totalAmount', totalAmount);
         formData.append('type', 'shopping');
+
 
         fetch(url, {
                 method: 'POST',
@@ -165,14 +205,17 @@
             })
             .then(text => {
                 console.log("Response body:", text);
-                window.location.href = "survey.html";
+                window.location.href = "survey.html"; // 合計金額が20000円以下なら次のページへ移動
             })
             .catch(error => {
                 console.error("Fetch error:", error);
+                // エラーが発生した場合はボタンの無効化を解除
+                finishShoppingButton.disabled = false;
             });
     }
 </script>
 
+<!-- トップ画像 -->
 <script>
     var swiper = new Swiper('.swiper-container', {
         // 2秒（2000ミリ秒）ごとにスライドを変更
@@ -186,6 +229,37 @@
             clickable: true,
         },
         speed: 1000
+    });
+</script>
+
+<!-- ポップアップ表示 -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const productImages = document.querySelectorAll('.productImg');
+        const popup = document.getElementById('product-popup');
+        const closeBtn = document.querySelector('.product-popup-close');
+        const popupImg = document.getElementById('popup-image');
+        const popupName = document.getElementById('popup-name');
+        const popupPrice = document.getElementById('popup-price');
+
+        productImages.forEach(productImg => {
+            productImg.addEventListener('click', function () {
+                const parentProduct = productImg.closest('.product');
+                const imgSrc = productImg.getAttribute('src');
+                const productName = parentProduct.querySelector('.product-name').textContent;
+                const productPrice = parentProduct.querySelector('.product-price').textContent;
+
+                popupImg.setAttribute('src', imgSrc);
+                popupName.textContent = productName;
+                popupPrice.textContent = productPrice;
+
+                popup.style.display = 'block';
+            });
+        });
+
+        closeBtn.addEventListener('click', function () {
+            popup.style.display = 'none';
+        });
     });
 </script>
 

@@ -15,30 +15,65 @@
         <form id="survey-form">
             <fieldset>
                 <legend>購買行動</legend>
-                <label for="criteria-quality">品質</label>
-                <input type="checkbox" id="criteria-quality" name="shopping-criteria" value="quality"><br>
-                <label for="criteria-price">価格</label>
-                <input type="checkbox" id="criteria-price" name="shopping-criteria" value="price"><br>
-                <label for="criteria-eco">環境に優しい</label>
-                <input type="checkbox" id="criteria-eco" name="shopping-criteria" value="eco-friendly"><br>
-                <label for="criteria-design">デザイン</label>
-                <input type="checkbox" id="criteria-design" name="shopping-criteria" value="design"><br>
 
-                <label for="impact-rating">環境にやさしいマークや割引はあなたの選択にどの程度影響しましたか？</label><br>
-                <input type="range" id="impact-rating" name="impact-rating" min="1" max="10">
+                <label for="impact-rating">Q1. 今回のショッピングサイトで何を重視して商品を選びましたか？ (複数回答可)</label><br>
+                <div class="answer">
+                    <label for="criteria-quality">品質</label>
+                    <input type="checkbox" id="criteria-quality" name="shopping-criteria" value="quality"><br>
+                    <label for="criteria-price">価格</label>
+                    <input type="checkbox" id="criteria-price" name="shopping-criteria" value="price"><br>
+                    <label for="criteria-eco">環境に優しい</label>
+                    <input type="checkbox" id="criteria-eco" name="shopping-criteria" value="eco-friendly"><br>
+                    <label for="criteria-design">デザイン</label>
+                    <input type="checkbox" id="criteria-design" name="shopping-criteria" value="design"><br>
+                </div>
+
+                <label for="impact-rating">Q2. 環境にやさしいマークや割引はあなたの選択にどの程度影響しましたか？</label><br>
+                <div class="slider-container">
+                    <input type="range" min="1" max="10" value="5" class="slider" id="impact-rating"
+                        name="impact-rating">
+                    <div class="slider-labels">
+                        <div class="slider-label" data-value="1"></div>
+                        <div class="slider-label" data-value="2"></div>
+                        <div class="slider-label" data-value="3"></div>
+                        <div class="slider-label" data-value="4"></div>
+                        <div class="slider-label" data-value="5"></div>
+                        <div class="slider-label" data-value="6"></div>
+                        <div class="slider-label" data-value="7"></div>
+                        <div class="slider-label" data-value="8"></div>
+                        <div class="slider-label" data-value="9"></div>
+                        <div class="slider-label" data-value="10"></div>
+                    </div>
+                </div>
             </fieldset>
 
             <fieldset>
                 <legend>体験感</legend>
-                <label for="site-experience">今回のショッピングサイトの体験を一言で表すと？</label><br>
-                <input type="text" id="site-experience" name="site-experience"><br>
-
-                <label for="eco-info-rating">環境にやさしい商品の説明・情報は十分でしたか？</label><br>
-                <input type="range" id="eco-info-rating" name="eco-info-rating" min="1" max="10">
+                <label for="site-experience">Q1. 今回のショッピングサイトの体験を一言で表すと？</label><br>
+                <div class="answer">
+                    <input type="text" id="site-experience" name="site-experience"><br>
+                </div>
+                <label for="eco-info-rating">Q2. 環境にやさしい商品の説明・情報は十分でしたか？</label><br>
+                <div class="slider-container">
+                    <input type="range" min="1" max="10" value="5" class="slider" id="eco-info-rating"
+                        name="eco-info-rating">
+                    <div class="slider-labels">
+                        <div class="slider-label" data-value="1"></div>
+                        <div class="slider-label" data-value="2"></div>
+                        <div class="slider-label" data-value="3"></div>
+                        <div class="slider-label" data-value="4"></div>
+                        <div class="slider-label" data-value="5"></div>
+                        <div class="slider-label" data-value="6"></div>
+                        <div class="slider-label" data-value="7"></div>
+                        <div class="slider-label" data-value="8"></div>
+                        <div class="slider-label" data-value="9"></div>
+                        <div class="slider-label" data-value="10"></div>
+                    </div>
+                </div>
             </fieldset>
             <div class="button">
-            <button type="button" class="submitSurvey">アンケートを送信</button>
-        </div>
+                <button type="button" class="submitSurvey">アンケートを送信</button>
+            </div>
         </form>
     </div>
 

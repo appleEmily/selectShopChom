@@ -77,6 +77,11 @@ h2 {
     width: 100%;
 }
 
+.products h2 {
+    width: 100%;
+    padding: 12px;
+}
+
 .products {
     display: flex;
     flex-wrap: wrap;
@@ -87,8 +92,8 @@ h2 {
 
 .product {
     position: relative;
-    margin: 10px;
-    margin-bottom: 16px;
+    margin: 18px;
+    margin-bottom: 24px;
     width: max-content;
     box-sizing: border-box;
     text-align: center;
@@ -110,7 +115,7 @@ h2 {
 
 .product-name {
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -176,6 +181,10 @@ footer h2 {
     /* 横スクロールを可能にする */
     gap: 10px;
     width: 60vw;
+}
+
+.cart-item-name {
+    font-size: 10px;
 }
 
 
@@ -261,6 +270,7 @@ footer h2 {
 }
 
 .popup-product-name,
+.popup-description,
 .popup-product-price {
     margin: 10px 0;
 }
