@@ -427,6 +427,7 @@
 
                 // Check if the item is already in the cart
                 let isAlreadyInCart = cart.some(item => item.name === productName);
+                let ecoMark = productDiv.querySelector('.mark-image') ? true : false;
 
                 if (isAlreadyInCart) {
                     alert('既に商品がカートに入っています。同じ商品を2点買うことはできません。');
@@ -435,7 +436,8 @@
                     let newItem = {
                         name: productName,
                         price: productPrice,
-                        image: productImage
+                        image: productImage,
+                        eco: ecoMark
                     };
                     cart.push(newItem);
 
