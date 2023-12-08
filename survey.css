@@ -11,7 +11,11 @@ body {
 h1 {
   color: #333;
   margin-bottom: 20px;
-  font-size: 24px; 
+  font-size: 32px; 
+}
+
+p {
+  font-size: 20px;
 }
 
 form {
@@ -32,9 +36,9 @@ legend {
 
 label {
   display: inline-block; 
-  margin-top: 10px;
+  margin-top: 24px;
   color: #252525;
-  font-size: 20px; /* フォントサイズを大きくする */
+  font-size: 24px; /* フォントサイズを大きくする */
 }
 
 .answer {
@@ -42,8 +46,8 @@ label {
 }
 
 input[type="checkbox"] {
-  transform: scale(1.5); /* チェックボックスを大きくする */
-  margin-right: 10px; /* チェックボックスのマージンを調整 */
+  transform: scale(3); /* チェックボックスを大きくする */
+  margin-left: 24px; /* チェックボックスのマージンを調整 */
   vertical-align: middle; /* チェックボックスをテキストの中央に揃える */
 }
 
@@ -176,6 +180,7 @@ input[type="text"]{
   cursor: pointer; /* カーソルをポインターに */
   border-radius: 0; /* 角の丸みをなくす */
   transition-duration: 0.4s; /* ホバー時の遷移の時間 */
+  font-size: 24px;
 }
 
 
